@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoltageEngine", "VoltageEngine.csproj", "{DDAFCD8F-2286-4E71-99A3-C683E419339D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{94995EF1-881D-4E0F-A137-2DD91544CB31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{3D5A8A7A-06AA-4AF7-920A-847E5757BEBC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DDAFCD8F-2286-4E71-99A3-C683E419339D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDAFCD8F-2286-4E71-99A3-C683E419339D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDAFCD8F-2286-4E71-99A3-C683E419339D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDAFCD8F-2286-4E71-99A3-C683E419339D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94995EF1-881D-4E0F-A137-2DD91544CB31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94995EF1-881D-4E0F-A137-2DD91544CB31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94995EF1-881D-4E0F-A137-2DD91544CB31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94995EF1-881D-4E0F-A137-2DD91544CB31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D5A8A7A-06AA-4AF7-920A-847E5757BEBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D5A8A7A-06AA-4AF7-920A-847E5757BEBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D5A8A7A-06AA-4AF7-920A-847E5757BEBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D5A8A7A-06AA-4AF7-920A-847E5757BEBC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
