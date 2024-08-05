@@ -7,17 +7,15 @@ namespace Server;
 public abstract class RemoteServer
 {
     protected readonly NetManager Manager;
-    private readonly NetDataWriter _writer;
 
     protected RemoteServer()
     {
         var listener = new EventBasedNetListener();
-        Manager = new NetManager(listener);
-        _writer = new NetDataWriter();
+        Manager = new NetManager(listener) { AutoRecycle = true };
 
         listener.ConnectionRequestEvent += OnConnectionRequest;
-        listener.PeerConnectedEvent += OnPeerConnected;
-        listener.PeerDisconnectedEvent += OnPeerDisconnected;
+        listener.PeerConnectedEvent += OnConnected;
+        listener.PeerDisconnectedEvent += OnDisconnected;
     }
 
     public void Start(int port, int tps)
@@ -32,18 +30,11 @@ public abstract class RemoteServer
         tickRate.Start();
     }
 
-    protected void Send<T>(T obj, NetPeer peer) where T : INetSerializable
-    {
-        _writer.Put(obj);
-        peer.Send(_writer, DeliveryMethod.ReliableOrdered);
-        _writer.Reset();
-    }
-
     protected abstract void OnTick();
     
     protected abstract void OnConnectionRequest(ConnectionRequest request);
 
-    protected abstract void OnPeerConnected(NetPeer peer);
-    
-    protected abstract void OnPeerDisconnected(NetPeer peer, DisconnectInfo info);
+    protected abstract void OnConnected(NetPeer client);
+
+    protected abstract void OnDisconnected(NetPeer client, DisconnectInfo info);
 }

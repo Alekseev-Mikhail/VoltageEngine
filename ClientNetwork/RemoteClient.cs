@@ -13,7 +13,7 @@ public abstract class RemoteClient
         var listener = new EventBasedNetListener();
         Manager = new NetManager(listener);
 
-        listener.NetworkReceiveEvent += (_, reader, _, _) => OnNetworkReceiveEvent(reader);
+        listener.NetworkReceiveEvent += (_, reader, _, _) => OnMessage(reader);
     }
     
     public void Connect(string address, int port, int serverUpdatesPerSecond)
@@ -26,5 +26,5 @@ public abstract class RemoteClient
         serverUpdateRate.Start();
     }
     
-    protected abstract void OnNetworkReceiveEvent(NetDataReader reader);
+    protected abstract void OnMessage(NetDataReader reader);
 }

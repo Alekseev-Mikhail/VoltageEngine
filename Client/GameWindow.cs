@@ -14,12 +14,13 @@ public class GameWindow
         uint height,
         string title,
         Styles style,
-        ContextSettings preSettings,
+        uint antialiasingLevel,
         Settings settings,
         IViewport viewport
     )
     {
-        _window = new RenderWindow(new VideoMode(width, height), title, style, preSettings);
+        var contextSettings = new ContextSettings { AntialiasingLevel = antialiasingLevel };
+        _window = new RenderWindow(new VideoMode(width, height), title, style, contextSettings);
         _viewport = viewport;
         _render = new Render(_window);
 

@@ -6,24 +6,23 @@ namespace Client;
 public class Render(RenderWindow window)
 {
     private Vector2f _vector;
-    private List<Shape> _shapePresets = new();
-    private List<Vertex[]> _linePresets = new();
+    private readonly List<RectangleShape> _rectanglePresets = [];
+    private readonly List<CircleShape> _circlePresets = [];
+    private readonly List<Vertex[]> _linePresets = [];
 
-    public int AddPreset(float sizeX, float sizeY)
+    public int AddRectanglePreset()
     {
-        _vector.X = sizeX;
-        _vector.Y = sizeY;
-        _shapePresets.Add(new RectangleShape(_vector));
-        return _shapePresets.Count - 1;
+        _rectanglePresets.Add(new RectangleShape());
+        return _rectanglePresets.Count - 1;
     }
     
-    public int AddPreset(float radius)
+    public int AddCirclePreset(float radius)
     {
-        _shapePresets.Add(new CircleShape(radius));
-        return _shapePresets.Count - 1;
+        _circlePresets.Add(new CircleShape(radius));
+        return _circlePresets.Count - 1;
     }
     
-    public int AddPreset(Color startColor, Color endColor)
+    public int AddLinePreset(Color startColor, Color endColor)
     {
         _linePresets.Add([new Vertex(), new Vertex()]);
         var index = _linePresets.Count - 1;
@@ -32,9 +31,24 @@ public class Render(RenderWindow window)
         return index;
     }
     
-    public void Perform(int presetIndex, float x, float y)
+    public void PerformRectangle(int presetIndex, float x, float y, float sizeX, float sizeY)
     {
-        var preset = _shapePresets[presetIndex];
+        var preset = _rectanglePresets[presetIndex];
+
+        _vector.X = x;
+        _vector.Y = y;
+        preset.Position = _vector;
+        
+        _vector.X = sizeX;
+        _vector.Y = sizeY;
+        preset.Size = _vector;
+        
+        window.Draw(preset);
+    }
+    
+    public void PerformCircle(int presetIndex, float x, float y)
+    {
+        var preset = _circlePresets[presetIndex];
 
         _vector.X = x;
         _vector.Y = y;
@@ -43,7 +57,7 @@ public class Render(RenderWindow window)
         window.Draw(preset);
     }
     
-    public void Perform(int presetIndex, float startX, float startY, float targetX, float targetY)
+    public void PerformLine(int presetIndex, float startX, float startY, float targetX, float targetY)
     {
         var preset = _linePresets[presetIndex];
         preset[0].Position.X = startX;

@@ -26,4 +26,6 @@ public class Player(float x, float y, float direction, float velocity)
         }
         get => direction;
     }
+
+    public Player Copy() => new Player(x, y, direction, velocity);
 }

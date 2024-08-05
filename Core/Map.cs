@@ -2,6 +2,7 @@ namespace Core;
 
 public class Map(string tileSet, int width, char wallTile)
 {
+    public string TileSet => tileSet;
     public int Width => width;
     public readonly int Height = tileSet.Length / width;
     public char WallTile => wallTile;
