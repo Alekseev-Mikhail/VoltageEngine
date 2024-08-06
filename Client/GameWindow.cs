@@ -15,7 +15,6 @@ public class GameWindow
         string title,
         Styles style,
         uint antialiasingLevel,
-        Settings settings,
         IViewport viewport
     )
     {
@@ -26,7 +25,6 @@ public class GameWindow
 
         _window.Closed += (_, _) => OnClose();
         _viewport.OnSetup(_render, _window.Size.X, _window.Size.Y);
-        settings.SetWindow(_window);
     }
 
     public void StartBlocking()
