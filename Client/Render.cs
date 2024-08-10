@@ -8,7 +8,8 @@ public class Render(RenderWindow window)
     private Vector2f _vector;
     private readonly List<RectangleShape> _rectanglePresets = [];
     private readonly List<CircleShape> _circlePresets = [];
-    private readonly List<Vertex[]> _linePresets = [];
+    private readonly Vertex[] _point = [new Vertex()];
+    private readonly Vertex[] _line = [new Vertex(), new Vertex()];
 
     public int AddRectanglePreset()
     {
@@ -20,15 +21,6 @@ public class Render(RenderWindow window)
     {
         _circlePresets.Add(new CircleShape(radius));
         return _circlePresets.Count - 1;
-    }
-    
-    public int AddLinePreset(Color startColor, Color endColor)
-    {
-        _linePresets.Add([new Vertex(), new Vertex()]);
-        var index = _linePresets.Count - 1;
-        _linePresets[index][0].Color = startColor;
-        _linePresets[index][1].Color = endColor;
-        return index;
     }
     
     public void PerformRectangle(int presetIndex, float x, float y, float sizeX, float sizeY)
@@ -57,14 +49,22 @@ public class Render(RenderWindow window)
         window.Draw(preset);
     }
     
-    public void PerformLine(int presetIndex, float startX, float startY, float targetX, float targetY)
+    public void PerformPoint(float x, float y, Color color)
     {
-        var preset = _linePresets[presetIndex];
-        preset[0].Position.X = startX;
-        preset[0].Position.Y = startY;
-        preset[1].Position.X = targetX;
-        preset[1].Position.Y = targetY;
-        window.Draw(preset, 0, 2, PrimitiveType.Lines);
-        window.ResetGLStates();
+        _point[0].Position.X = x;
+        _point[0].Position.Y = y;
+        _point[0].Color = color;
+        window.Draw(_point, 0, 1, PrimitiveType.Points);
+    }
+    
+    public void PerformLine(float startX, float startY, float targetX, float targetY, Color color)
+    {
+        _line[0].Position.X = startX;
+        _line[0].Position.Y = startY;
+        _line[0].Color = color;
+        _line[1].Position.X = targetX;
+        _line[1].Position.Y = targetY;
+        _line[1].Color = color;
+        window.Draw(_line, 0, 2, PrimitiveType.Lines);
     }
 }

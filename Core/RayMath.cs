@@ -4,7 +4,7 @@ public class RayMath
 {
     public Ray ResultRay = new();
     
-    public void Release(Player player, Map map, float angle, float maxDistance, float stepLength)
+    public void Release(IPlayer player, Map map, float angle, float maxDistance, float stepLength)
     {
         for (float distance = 0; distance < maxDistance; distance += stepLength)
         {
@@ -14,10 +14,11 @@ public class RayMath
         }
     }
 
-    public void Step(Player player, Map map, float angle, float distance)
+    public void Step(IPlayer player, Map map, float angle, float distance)
     {
-        var deltaX = MathF.Cos(angle) * distance;
-        var deltaY = MathF.Sin(angle) * distance;
+        var angleInRadians = float.DegreesToRadians(angle);
+        var deltaX = MathF.Cos(angleInRadians) * distance;
+        var deltaY = MathF.Sin(angleInRadians) * distance;
         var targetX = player.X + deltaX;
         var targetY = player.Y + deltaY;
         ResultRay.Update(distance, targetX, targetY, map.GetTile(targetX, targetY) == map.WallTile);

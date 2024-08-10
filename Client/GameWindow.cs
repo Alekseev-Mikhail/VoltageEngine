@@ -23,6 +23,7 @@ public class GameWindow
         _viewport = viewport;
         _render = new Render(_window);
 
+        _window.SetKeyRepeatEnabled(false);
         _window.Closed += (_, _) => OnClose();
         _viewport.OnSetup(_render, _window.Size.X, _window.Size.Y);
     }
