@@ -9,6 +9,8 @@ public class GameWindow
     private readonly IViewport _viewport;
     private readonly Render _render;
 
+    private Action? _onClosed;
+
     public GameWindow(
         uint width,
         uint height,
@@ -46,8 +48,11 @@ public class GameWindow
         _window.KeyReleased += (_, args) => controller.OnKeyReleased(args);
     }
 
+    public void SetOnClosedAction(Action action) => _onClosed = action;
+
     private void OnClose()
     {
+        _onClosed?.Invoke();
         _window.Dispose();
         _window.Close();
     }
